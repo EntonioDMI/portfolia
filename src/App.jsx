@@ -16,7 +16,7 @@ const ease = [0.22, 1, 0.36, 1];
 
 const telegramUrl = 'https://t.me/Dmitign';
 const discordUrl = 'https://discord.com/app';
-const projectUrl = 'https://example.com/wedding-landing';
+const projectUrl = 'https://entoniodmi.github.io/portfolia/';
 const email = 'soccious@gmail.com';
 
 const marqueeItems = [
@@ -38,12 +38,7 @@ const contactRows = [
   ['E-mail', email],
 ];
 
-function ActionButton({
-  children,
-  variant = 'primary',
-  onClick,
-  className = '',
-}) {
+function ActionButton({ children, variant = 'primary', onClick, className = '' }) {
   return (
     <motion.button
       type="button"
@@ -441,12 +436,12 @@ export default function App() {
               </h2>
               <div className="mt-10 space-y-5">
                 <p className="text-sm uppercase tracking-[0.34em] text-[var(--text-soft)]">
-                  Wedding Landing
+                  Sinveil Portfolio
                 </p>
-                <p className="text-[15px] text-[var(--text)]">Одностраничный сайт</p>
+                <p className="text-[15px] text-[var(--text)]">Портфолио-лендинг</p>
                 <p className="text-[15px] leading-8 text-[var(--text-soft)]">
-                  Аккуратный лендинг с акцентом на подачу, атмосферу, адаптивность и
-                  визуально цельный интерфейс.
+                  Арт-направленное монохромное портфолио с акцентом на композицию,
+                  атмосферу, анимации и цельную визуальную подачу.
                 </p>
               </div>
               <div className="mt-10">
@@ -470,7 +465,7 @@ export default function App() {
 
               <article className="project-card">
                 <div className="project-card-head">
-                  <span className="project-card-pill">Wedding Landing</span>
+                  <span className="project-card-pill">Sinveil Portfolio</span>
                   <span className="project-card-pill">Адаптивный</span>
                 </div>
 
@@ -480,16 +475,17 @@ export default function App() {
                     <div className="space-y-3">
                       <div className="h-px w-20 bg-white/20" />
                       <p className="text-[10px] uppercase tracking-[0.36em] text-[var(--text-soft)]">
-                        Атмосфера, структура, адаптивность
+                        Композиция, атмосфера, анимации
                       </p>
                     </div>
 
                     <div className="space-y-4">
                       <p className="text-[clamp(1.9rem,3vw,3rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[var(--text)]">
-                        Цельная подача в одном экране
+                        Персональный лендинг с сильной подачей
                       </p>
                       <p className="max-w-[34ch] text-sm leading-7 text-[var(--text-soft)]">
-                        Спокойная композиция, чистые блоки и аккуратная иерархия деталей.
+                        Проект, в котором акцент сделан на пропорции, типографику и
+                        монохромную среду.
                       </p>
                     </div>
                   </div>
