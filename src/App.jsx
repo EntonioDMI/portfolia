@@ -75,14 +75,14 @@ export default function App() {
     offset: ['start start', 'end start'],
   });
 
-  const portraitY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 72]), {
+  const portraitY = useSpring(useTransform(scrollYProgress, [0, 1], [0, 56]), {
     stiffness: 80,
     damping: 20,
     mass: 0.4,
   });
 
-  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.04]);
-  const haloY = useTransform(scrollYProgress, [0, 1], [0, -36]);
+  const portraitScale = useTransform(scrollYProgress, [0, 1], [1, 1.025]);
+  const haloY = useTransform(scrollYProgress, [0, 1], [0, -24]);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -216,18 +216,19 @@ export default function App() {
             { id: 'project', label: 'ПРОЕКТ' },
             { id: 'contact', label: 'КОНТАКТЫ' },
           ]}
-          bodyClassName="min-h-[680px] lg:min-h-[780px]"
+          bodyClassName="min-h-[500px] lg:min-h-[548px]"
+          footerClassName="hero-panel-footer"
           footer={
-            <div className="grid gap-8 lg:grid-cols-[320px_minmax(0,1fr)] lg:items-end">
-              <div className="grid gap-5 sm:grid-cols-2">
-                <div className="space-y-2">
+            <div className="hero-footer-grid grid gap-6 lg:grid-cols-[320px_minmax(0,1fr)]">
+              <div className="hero-meta-grid grid gap-5 sm:grid-cols-2">
+                <div className="hero-meta-item space-y-2">
                   <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--text-soft)]">
                     Опыт
                   </p>
                   <p className="text-sm text-[var(--text)]">1+ year</p>
                 </div>
 
-                <div className="space-y-2">
+                <div className="hero-meta-item space-y-2">
                   <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--text-soft)]">
                     Фокус
                   </p>
@@ -235,7 +236,7 @@ export default function App() {
                 </div>
               </div>
 
-              <div className="marquee-row">
+              <div className="marquee-row marquee-rail">
                 <div className="marquee-track">
                   {[...marqueeItems, ...marqueeItems].map((item, index) => (
                     <span key={`${item}-${index}`} className="marquee-item">
@@ -249,9 +250,9 @@ export default function App() {
         >
           <div
             ref={heroRef}
-            className="grid gap-10 lg:grid-cols-[minmax(0,0.94fr)_minmax(320px,0.88fr)] lg:items-end lg:gap-6"
+            className="grid gap-8 lg:grid-cols-[minmax(0,0.98fr)_minmax(300px,0.82fr)] lg:items-center lg:gap-5"
           >
-            <div className="flex max-w-[720px] flex-col justify-center">
+            <div className="flex max-w-[680px] flex-col justify-start lg:pt-1">
               <motion.p
                 className="meta-chip"
                 initial={{ opacity: 0, y: 18 }}
@@ -262,7 +263,7 @@ export default function App() {
               </motion.p>
 
               <motion.p
-                className="mt-8 text-xs uppercase tracking-[0.34em] text-[var(--text-soft)]"
+                className="mt-5 text-xs uppercase tracking-[0.34em] text-[var(--text-soft)]"
                 initial={{ opacity: 0, y: 18 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.75, delay: 0.06, ease }}
@@ -271,7 +272,7 @@ export default function App() {
               </motion.p>
 
               <motion.h1
-                className="mt-5 text-[clamp(4rem,13vw,8.7rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.08em]"
+                className="mt-3 text-[clamp(3.8rem,12.2vw,8rem)] font-extrabold uppercase leading-[0.88] tracking-[-0.08em]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.08, ease }}
@@ -280,7 +281,7 @@ export default function App() {
               </motion.h1>
 
               <motion.p
-                className="mt-6 max-w-[16ch] text-[clamp(1.45rem,3.5vw,2.7rem)] font-semibold leading-[1.04] tracking-[-0.05em] text-[var(--text)]"
+                className="mt-4 max-w-[16ch] text-[clamp(1.35rem,3.15vw,2.35rem)] font-semibold leading-[1.04] tracking-[-0.05em] text-[var(--text)]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, delay: 0.14, ease }}
@@ -289,7 +290,7 @@ export default function App() {
               </motion.p>
 
               <motion.p
-                className="mt-7 max-w-[620px] text-sm leading-7 text-[var(--text-soft)] sm:text-[15px]"
+                className="mt-5 max-w-[560px] text-sm leading-6 text-[var(--text-soft)] sm:text-[14px]"
                 initial={{ opacity: 0, y: 24 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.88, delay: 0.2, ease }}
@@ -299,7 +300,7 @@ export default function App() {
               </motion.p>
 
               <motion.div
-                className="mt-10 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
+                className="mt-7 flex flex-col gap-3 sm:flex-row sm:flex-wrap"
                 initial={{ opacity: 0, y: 22 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.82, delay: 0.26, ease }}
@@ -314,7 +315,7 @@ export default function App() {
             </div>
 
             <motion.div
-              className="relative flex min-h-[430px] items-end justify-center lg:min-h-[720px]"
+              className="relative flex min-h-[360px] items-end justify-center lg:min-h-[560px]"
               initial={{ opacity: 0, y: 28, scale: 0.985 }}
               animate={{ opacity: 1, y: 0, scale: 1 }}
               transition={{ duration: 1, delay: 0.16, ease }}
@@ -356,7 +357,7 @@ export default function App() {
             { id: 'project', label: 'ПРОЕКТ' },
             { id: 'contact', label: 'КОНТАКТЫ' },
           ]}
-          bodyClassName="min-h-[620px] lg:min-h-[700px]"
+          bodyClassName="min-h-[596px] lg:min-h-[676px]"
           footer={
             <div className="flex flex-wrap gap-3">
               {aboutLabels.map((item) => (
@@ -416,7 +417,7 @@ export default function App() {
             { id: 'about', label: 'ОБО МНЕ' },
             { id: 'contact', label: 'КОНТАКТЫ' },
           ]}
-          bodyClassName="min-h-[640px] lg:min-h-[720px]"
+          bodyClassName="min-h-[612px] lg:min-h-[692px]"
           footer={
             <div className="grid gap-3 text-xs uppercase tracking-[0.32em] text-[var(--text-soft)] sm:grid-cols-2">
               <p>Первый опубликованный проект</p>
@@ -514,7 +515,7 @@ export default function App() {
             { id: 'about', label: 'ОБО МНЕ' },
             { id: 'project', label: 'ПРОЕКТ' },
           ]}
-          bodyClassName="min-h-[600px] lg:min-h-[680px]"
+          bodyClassName="min-h-[576px] lg:min-h-[656px]"
           footer={
             <div className="flex flex-col gap-3 md:flex-row md:flex-wrap">
               <ActionButton onClick={() => openExternal(telegramUrl)}>

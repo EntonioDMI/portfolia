@@ -13,6 +13,7 @@ export default function PanelShell({
   footer,
   className = '',
   bodyClassName = '',
+  footerClassName = '',
 }) {
   return (
     <motion.section
@@ -40,16 +41,16 @@ export default function PanelShell({
           <button
             type="button"
             onClick={() => onNavigate('main')}
-            className="inline-flex items-center gap-3 text-left"
+            className="panel-logo-button"
             data-cursor="active"
             aria-label="Перейти к началу страницы"
           >
             <span className="panel-logo">SI</span>
           </button>
 
-          <div className="flex items-center gap-3 md:gap-5">
+          <div className="panel-header-meta">
             <nav aria-label="Локальная навигация" className="hidden md:block">
-              <ul className="flex items-center gap-4">
+              <ul className="panel-nav-list">
                 {navItems.map((item) => (
                   <li key={item.id}>
                     <button
@@ -68,7 +69,7 @@ export default function PanelShell({
             </nav>
 
             <span
-              className={`rounded-full border px-3 py-1 text-[10px] uppercase tracking-[0.36em] ${
+              className={`panel-index-badge ${
                 activeSection === id
                   ? 'border-[color:var(--line-strong)] text-[var(--text)]'
                   : 'border-[color:var(--line)] text-[var(--text-soft)]'
@@ -81,7 +82,7 @@ export default function PanelShell({
 
         <div className={`panel-body ${bodyClassName}`}>{children}</div>
 
-        {footer ? <footer className="panel-footer">{footer}</footer> : null}
+        {footer ? <footer className={`panel-footer ${footerClassName}`}>{footer}</footer> : null}
       </div>
     </motion.section>
   );

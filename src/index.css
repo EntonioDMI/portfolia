@@ -45,10 +45,9 @@ body {
   margin: 0;
   min-width: 320px;
   background:
-    radial-gradient(circle at top, rgba(255, 255, 255, 0.08), transparent 22%),
-    radial-gradient(circle at 15% 20%, rgba(255, 255, 255, 0.07), transparent 30%),
-    radial-gradient(circle at 85% 35%, rgba(0, 0, 0, 0.18), transparent 28%),
-    linear-gradient(180deg, var(--page-bg) 0%, var(--page-bg-dark) 36%, var(--page-bg) 100%);
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.045), transparent 18%),
+    radial-gradient(circle at 50% 24%, rgba(0, 0, 0, 0.12), transparent 42%),
+    linear-gradient(180deg, #37373b 0%, #343438 24%, #313136 58%, #353539 100%);
   color: var(--text);
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
@@ -95,9 +94,9 @@ img {
   inset: 0;
   z-index: 0;
   background:
-    radial-gradient(circle at 18% 12%, rgba(255, 255, 255, 0.06), transparent 22%),
-    radial-gradient(circle at 82% 24%, rgba(255, 255, 255, 0.035), transparent 18%),
-    radial-gradient(circle at 50% 100%, rgba(0, 0, 0, 0.22), transparent 34%);
+    radial-gradient(circle at 50% 16%, rgba(255, 255, 255, 0.04), transparent 18%),
+    radial-gradient(circle at 50% 34%, rgba(0, 0, 0, 0.16), transparent 34%),
+    radial-gradient(circle at 50% 72%, rgba(0, 0, 0, 0.14), transparent 32%);
   pointer-events: none;
 }
 
@@ -105,7 +104,7 @@ img {
   position: fixed;
   inset: 0;
   z-index: 1;
-  opacity: 0.1;
+  opacity: 0.065;
   pointer-events: none;
   background-image:
     radial-gradient(rgba(255, 255, 255, 0.08) 0.7px, transparent 0.7px),
@@ -118,14 +117,14 @@ img {
   position: fixed;
   inset: 0 auto auto 50%;
   z-index: 1;
-  width: min(1100px, 88vw);
-  height: 480px;
+  width: min(980px, 84vw);
+  height: 390px;
   transform: translateX(-50%);
   border-radius: 9999px;
   pointer-events: none;
-  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.1), transparent 68%);
-  filter: blur(24px);
-  opacity: 0.52;
+  background: radial-gradient(circle at center, rgba(255, 255, 255, 0.07), transparent 66%);
+  filter: blur(28px);
+  opacity: 0.38;
 }
 
 .panel-stage {
@@ -138,9 +137,11 @@ img {
   border: 1px solid var(--line);
   border-radius: 2rem;
   background:
-    linear-gradient(180deg, rgba(255, 255, 255, 0.035), rgba(255, 255, 255, 0.012) 18%, rgba(0, 0, 0, 0) 55%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.03), rgba(255, 255, 255, 0.012) 16%, rgba(0, 0, 0, 0) 54%),
     linear-gradient(180deg, var(--panel-soft) 0%, var(--panel) 100%);
-  box-shadow: var(--shadow-panel);
+  box-shadow:
+    0 24px 72px rgba(0, 0, 0, 0.28),
+    0 0 0 1px rgba(255, 255, 255, 0.02);
   isolation: isolate;
 }
 
@@ -174,20 +175,45 @@ img {
 
 .panel-header {
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  padding: 1.35rem 1.5rem;
+  min-height: 5.5rem;
+  padding: 0 1.5rem;
   border-bottom: 1px solid var(--line);
 }
 
 .panel-body {
-  padding: 2rem 1.5rem;
+  padding: 1.65rem 1.5rem 1.8rem;
 }
 
 .panel-footer {
-  padding: 1.35rem 1.5rem 1.5rem;
+  padding: 0.95rem 1.5rem 1.05rem;
   border-top: 1px solid var(--line);
+}
+
+.panel-logo-button,
+.panel-header-meta,
+.panel-nav-list {
+  display: flex;
+  align-items: center;
+}
+
+.panel-logo-button {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  line-height: 1;
+  text-align: left;
+}
+
+.panel-header-meta {
+  gap: 0.75rem;
+}
+
+.panel-nav-list {
+  gap: 1rem;
 }
 
 .panel-logo {
@@ -203,17 +229,22 @@ img {
   font-size: 0.75rem;
   font-weight: 700;
   letter-spacing: 0.34em;
+  line-height: 1;
   text-transform: uppercase;
   color: var(--text);
 }
 
 .panel-nav-link {
   position: relative;
-  padding: 0.3rem 0;
+  display: inline-flex;
+  align-items: center;
+  min-height: 1rem;
+  padding: 0;
   border: 0;
   background: transparent;
   font-size: 0.7rem;
   letter-spacing: 0.3em;
+  line-height: 1;
   text-transform: uppercase;
   color: var(--text-soft);
   transition:
@@ -242,6 +273,20 @@ img {
 .panel-nav-link:hover::after,
 .panel-nav-link-active::after {
   transform: scaleX(1);
+}
+
+.panel-index-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 2rem;
+  padding: 0 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 9999px;
+  font-size: 0.625rem;
+  letter-spacing: 0.36em;
+  line-height: 1;
+  text-transform: uppercase;
 }
 
 .edge-index,
@@ -289,8 +334,12 @@ img {
 }
 
 .marquee-row {
-  overflow: hidden;
   position: relative;
+  display: flex;
+  align-items: center;
+  min-height: 2.6rem;
+  overflow: hidden;
+  line-height: 1;
 }
 
 .marquee-row::before,
@@ -316,6 +365,8 @@ img {
 
 .marquee-track {
   display: flex;
+  align-items: center;
+  height: 100%;
   width: max-content;
   animation: marquee 22s linear infinite;
 }
@@ -323,10 +374,13 @@ img {
 .marquee-item {
   display: inline-flex;
   align-items: center;
+  flex: 0 0 auto;
+  min-height: 2.6rem;
   gap: 1.2rem;
   padding-right: 1.2rem;
   font-size: 0.68rem;
   letter-spacing: 0.34em;
+  line-height: 1;
   text-transform: uppercase;
   color: var(--text-soft);
 }
@@ -340,8 +394,8 @@ img {
 
 .portrait-plinth {
   position: absolute;
-  inset: auto 5% 2% 5%;
-  height: 24%;
+  inset: auto 8% 3% 8%;
+  height: 20%;
   border-radius: 9999px;
   background: rgba(0, 0, 0, 0.56);
   filter: blur(48px);
@@ -349,20 +403,20 @@ img {
 
 .portrait-shadow {
   position: absolute;
-  inset: 7% 11% auto 11%;
-  height: 72%;
+  inset: 4% 13% auto 13%;
+  height: 64%;
   border-radius: 2rem;
   background:
-    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.1), transparent 34%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.025), transparent 46%);
+    radial-gradient(circle at 50% 0%, rgba(255, 255, 255, 0.08), transparent 34%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.02), transparent 42%);
   filter: blur(10px);
-  opacity: 0.9;
+  opacity: 0.78;
 }
 
 .portrait-shell {
   position: relative;
-  width: min(100%, 680px);
-  height: clamp(430px, 52vw, 740px);
+  width: min(100%, 620px);
+  height: clamp(360px, 42vw, 610px);
   display: flex;
   align-items: flex-end;
   justify-content: center;
@@ -371,12 +425,12 @@ img {
 
 .portrait-backdrop {
   position: absolute;
-  inset: 10% 0 0 0;
+  inset: 8% 2% 0 2%;
   border: 1px solid var(--line);
   border-radius: 2rem;
   background:
-    radial-gradient(circle at 54% 12%, rgba(255, 255, 255, 0.08), transparent 28%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.012) 28%, rgba(0, 0, 0, 0.04) 100%);
+    radial-gradient(circle at 54% 14%, rgba(255, 255, 255, 0.07), transparent 26%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.032), rgba(255, 255, 255, 0.01) 26%, rgba(0, 0, 0, 0.04) 100%);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.03);
 }
 
@@ -507,6 +561,30 @@ img {
   background: rgba(255, 255, 255, 0.02);
 }
 
+.hero-panel-footer {
+  display: flex;
+  align-items: center;
+  min-height: 5rem;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.hero-footer-grid {
+  width: 100%;
+  align-items: center;
+}
+
+.hero-meta-grid {
+  align-items: center;
+}
+
+.hero-meta-item {
+  display: flex;
+  min-height: 2.6rem;
+  flex-direction: column;
+  justify-content: center;
+}
+
 @keyframes marquee {
   from {
     transform: translateX(0);
@@ -525,29 +603,47 @@ img {
 
 @media (min-width: 640px) {
   .panel-header {
-    padding: 1.5rem 2rem;
+    min-height: 5.95rem;
+    padding: 0 2rem;
   }
 
   .panel-body {
-    padding: 2.4rem 2rem;
+    padding: 1.9rem 2rem 2rem;
   }
 
   .panel-footer {
-    padding: 1.5rem 2rem 1.7rem;
+    padding: 1rem 2rem 1.1rem;
+  }
+
+  .hero-panel-footer {
+    min-height: 5.25rem;
   }
 }
 
 @media (min-width: 1024px) {
   .panel-header {
-    padding: 1.75rem 3rem;
+    min-height: 6.4rem;
+    padding: 0 3rem;
   }
 
   .panel-body {
-    padding: 3rem;
+    padding: 2.15rem 3rem 2.25rem;
   }
 
   .panel-footer {
-    padding: 1.6rem 3rem 1.9rem;
+    padding: 1rem 3rem 1.1rem;
+  }
+
+  .panel-header-meta {
+    gap: 1.25rem;
+  }
+
+  .panel-nav-list {
+    gap: 1.25rem;
+  }
+
+  .hero-panel-footer {
+    min-height: 5.4rem;
   }
 }
 
