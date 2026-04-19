@@ -11,12 +11,13 @@ import { startTransition, useEffect, useRef, useState } from 'react';
 import portrait from './assets/portrait.png';
 import CustomCursor from './components/CustomCursor';
 import PanelShell from './components/PanelShell';
+import PortfolioCarousel from './components/PortfolioCarousel';
+import { projects } from './data/projects';
 
 const ease = [0.22, 1, 0.36, 1];
 
 const telegramUrl = 'https://t.me/Dmitign';
 const discordUrl = 'https://discord.com/app';
-const projectUrl = 'https://entoniodmi.github.io/portfolia/';
 const email = 'soccious@gmail.com';
 
 const marqueeItems = [
@@ -37,6 +38,26 @@ const contactRows = [
   ['Discord', 'soccious'],
   ['E-mail', email],
 ];
+
+const projectCopyMotion = {
+  enter: (direction) => ({
+    opacity: 0,
+    y: direction >= 0 ? 20 : -20,
+    filter: 'blur(10px)',
+  }),
+  center: {
+    opacity: 1,
+    y: 0,
+    filter: 'blur(0px)',
+    transition: { duration: 0.58, delay: 0.12, ease },
+  },
+  exit: (direction) => ({
+    opacity: 0,
+    y: direction >= 0 ? -16 : 16,
+    filter: 'blur(8px)',
+    transition: { duration: 0.3, ease },
+  }),
+};
 
 function ActionButton({ children, variant = 'primary', onClick, className = '' }) {
   return (
@@ -63,7 +84,11 @@ export default function App() {
   const lenisRef = useRef(null);
   const heroRef = useRef(null);
   const [activeSection, setActiveSection] = useState('main');
+  const [activeProjectIndex, setActiveProjectIndex] = useState(0);
+  const [projectDirection, setProjectDirection] = useState(1);
   const [toast, setToast] = useState('');
+
+  const activeProject = projects[activeProjectIndex] ?? null;
 
   const { scrollYProgress } = useScroll({
     target: heroRef,
@@ -163,6 +188,23 @@ export default function App() {
     } catch {
       setToast('Не удалось выполнить действие');
     }
+  }
+
+  function changeProject(nextIndex) {
+    if (!projects.length) {
+      return;
+    }
+
+    const normalizedNext = ((nextIndex % projects.length) + projects.length) % projects.length;
+    const forwardDistance = (normalizedNext - activeProjectIndex + projects.length) % projects.length;
+    const backwardDistance = (activeProjectIndex - normalizedNext + projects.length) % projects.length;
+    const direction = forwardDistance === 0 ? 0 : forwardDistance <= backwardDistance ? 1 : -1;
+
+    setProjectDirection(direction);
+
+    startTransition(() => {
+      setActiveProjectIndex(normalizedNext);
+    });
   }
 
   async function copyEmail() {
@@ -416,11 +458,11 @@ export default function App() {
           footer={
             <div className="grid gap-3 text-xs uppercase tracking-[0.32em] text-[var(--text-soft)] sm:grid-cols-2">
               <p>Первый опубликованный проект</p>
-              <p className="text-left sm:text-right">Скоро здесь появятся новые работы</p>
+              <p className="text-left sm:text-right">Новые работы легко добавить позже</p>
             </div>
           }
         >
-          <div className="grid gap-12 lg:grid-cols-[minmax(260px,0.56fr)_minmax(0,1fr)] lg:items-center">
+          <div className="grid gap-12 lg:grid-cols-[minmax(260px,0.5fr)_minmax(0,1fr)] lg:items-center">
             <motion.div
               className="max-w-[430px]"
               initial={{ opacity: 0, y: 26 }}
@@ -432,70 +474,72 @@ export default function App() {
                 ПРОЕКТ
               </p>
               <h2 className="mt-6 text-[clamp(2.9rem,6vw,5rem)] font-semibold uppercase leading-[0.94] tracking-[-0.07em]">
-                ПРОЕКТ
+                ПРОЕКТЫ
               </h2>
-              <div className="mt-10 space-y-5">
-                <p className="text-sm uppercase tracking-[0.34em] text-[var(--text-soft)]">
-                  Sinveil Portfolio
-                </p>
-                <p className="text-[15px] text-[var(--text)]">Портфолио-лендинг</p>
-                <p className="text-[15px] leading-8 text-[var(--text-soft)]">
-                  Арт-направленное монохромное портфолио с акцентом на композицию,
-                  атмосферу, анимации и цельную визуальную подачу.
-                </p>
-              </div>
-              <div className="mt-10">
-                <ActionButton onClick={() => openExternal(projectUrl)}>
-                  ОТКРЫТЬ ПРОЕКТ
-                </ActionButton>
-              </div>
+
+              {activeProject ? (
+                <div className="portfolio-copy-stage">
+                  <AnimatePresence initial={false} custom={projectDirection}>
+                    <motion.div
+                      key={activeProject.id}
+                      custom={projectDirection}
+                      variants={projectCopyMotion}
+                      initial="enter"
+                      animate="center"
+                      exit="exit"
+                      className="portfolio-copy-panel"
+                    >
+                      <div className="portfolio-copy-meta">
+                        <span>{activeProject.status}</span>
+                        <span>{activeProject.year}</span>
+                      </div>
+
+                      <div className="mt-8">
+                        <p className="portfolio-copy-title">{activeProject.title}</p>
+                        <p className="portfolio-copy-type">{activeProject.type}</p>
+                        <p className="portfolio-copy-summary">{activeProject.summary}</p>
+                        <div className="portfolio-copy-tags">
+                          {activeProject.tags.map((tag) => (
+                            <span key={tag} className="portfolio-copy-tag">
+                              {tag}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+
+                      <div className="mt-10">
+                        <ActionButton onClick={() => openExternal(activeProject.url)}>
+                          ОТКРЫТЬ ПРОЕКТ
+                        </ActionButton>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              ) : (
+                <div className="mt-8 space-y-5">
+                  <p className="text-sm uppercase tracking-[0.34em] text-[var(--text-soft)]">
+                    Проекты скоро появятся
+                  </p>
+                  <p className="portfolio-copy-summary">
+                    Добавьте первый объект в <code>src/data/projects.js</code>, чтобы заполнить
+                    карусель.
+                  </p>
+                </div>
+              )}
             </motion.div>
 
             <motion.div
-              className="project-stage"
               initial={{ opacity: 0, y: 28 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.25 }}
               transition={{ duration: 0.9, delay: 0.08, ease }}
             >
-              <div className="project-ghost project-ghost-left" aria-hidden="true">
-                <span className="project-ghost-line" />
-                <span className="project-ghost-line short" />
-              </div>
-
-              <article className="project-card">
-                <div className="project-card-head">
-                  <span className="project-card-pill">Sinveil Portfolio</span>
-                  <span className="project-card-pill">Адаптивный</span>
-                </div>
-
-                <div className="project-card-screen">
-                  <div className="project-card-overlay" aria-hidden="true" />
-                  <div className="space-y-5">
-                    <div className="space-y-3">
-                      <div className="h-px w-20 bg-white/20" />
-                      <p className="text-[10px] uppercase tracking-[0.36em] text-[var(--text-soft)]">
-                        Композиция, атмосфера, анимации
-                      </p>
-                    </div>
-
-                    <div className="space-y-4">
-                      <p className="text-[clamp(1.9rem,3vw,3rem)] font-semibold leading-[0.98] tracking-[-0.06em] text-[var(--text)]">
-                        Персональный лендинг с сильной подачей
-                      </p>
-                      <p className="max-w-[34ch] text-sm leading-7 text-[var(--text-soft)]">
-                        Проект, в котором акцент сделан на пропорции, типографику и
-                        монохромную среду.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </article>
-
-              <div className="project-ghost project-ghost-right" aria-hidden="true">
-                <span className="project-ghost-line" />
-                <span className="project-ghost-line short" />
-              </div>
+              <PortfolioCarousel
+                projects={projects}
+                activeIndex={activeProjectIndex}
+                onChange={changeProject}
+                onOpenProject={(project) => openExternal(project.url)}
+              />
             </motion.div>
           </div>
         </PanelShell>
