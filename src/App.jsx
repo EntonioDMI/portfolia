@@ -17,6 +17,8 @@ import { projects } from './data/projects';
 const ease = [0.22, 1, 0.36, 1];
 
 const telegramUrl = 'https://t.me/Dmitign';
+const pricingUrl =
+  'https://docs.google.com/document/d/18sSayog3-WJLaFqUqhhyE7nH6RuCicPZDKC-fKneBeM/edit?usp=sharing';
 const discordUrl = 'https://discord.com/app';
 const email = 'soccious@gmail.com';
 
@@ -345,8 +347,8 @@ export default function App() {
                 <ActionButton onClick={() => openExternal(telegramUrl)}>
                   Написать в Telegram
                 </ActionButton>
-                <ActionButton variant="secondary" onClick={() => openExternal(discordUrl)}>
-                  Связаться в Discord
+                <ActionButton variant="secondary" onClick={() => openExternal(pricingUrl)}>
+                  Узнать о расценках
                 </ActionButton>
               </motion.div>
             </div>
