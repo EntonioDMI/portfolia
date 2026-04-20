@@ -4,7 +4,7 @@ export const projects = [
     title: 'Sinveil Portfolio',
     type: 'Персональный сайт',
     year: '2026',
-    status: 'LIVE',
+    status: 'ОНЛАЙН',
     summary:
       'Монохромное портфолио с акцентом на типографику, плавное движение и цельную композицию.',
     tags: ['React', 'Motion', 'UI'],

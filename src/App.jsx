@@ -264,7 +264,7 @@ export default function App() {
                   <p className="text-[10px] uppercase tracking-[0.34em] text-[var(--text-soft)]">
                     Опыт
                   </p>
-                  <p className="text-sm text-[var(--text)]">1+ year</p>
+                  <p className="text-sm text-[var(--text)]">1+ год</p>
                 </div>
 
                 <div className="hero-meta-item space-y-2">
@@ -459,8 +459,8 @@ export default function App() {
           bodyClassName="min-h-[612px] lg:min-h-[692px]"
           footer={
             <div className="grid gap-3 text-xs uppercase tracking-[0.32em] text-[var(--text-soft)] sm:grid-cols-2">
-              <p>Первый опубликованный проект</p>
-              <p className="text-left sm:text-right">Новые работы легко добавить позже</p>
+              <p>Чистая подача и цельная композиция</p>
+              <p className="text-left sm:text-right">Адаптивная вёрстка и спокойная анимация</p>
             </div>
           }
         >
@@ -520,11 +520,10 @@ export default function App() {
               ) : (
                 <div className="mt-8 space-y-5">
                   <p className="text-sm uppercase tracking-[0.34em] text-[var(--text-soft)]">
-                    Проекты скоро появятся
+                    Портфолио обновляется
                   </p>
                   <p className="portfolio-copy-summary">
-                    Добавьте первый объект в <code>src/data/projects.js</code>, чтобы заполнить
-                    карусель.
+                    Здесь появятся новые работы и подробности следующих проектов.
                   </p>
                 </div>
               )}
